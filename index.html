@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Belajar JavaScript DOM</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <h1>Contoh JavaScript DOM & Event Handling</h1>
+
+  <!-- Get Element by ID dan Tag -->
+  <div class="box">
+    <h2>Get Element by ID dan Tag</h2>
+    <div id="main">
+      <p>HTML Elements by Tag Name</p>
+      <p><b>Contoh getElementsByTagName</b> method.</p>
+    </div>
+    <p id="demo"></p>
+  </div>
+
+  <!-- Mengganti Gambar -->
+  <div class="box">
+    <img id="myImage" src="https://polije.ac.id/wp-content/uploads/elementor/thumbs/Logo-branding-pfusa8almjxsbxc0o275i2oe6089pc4oms8rkv5mgw.png" width="200">
+    <br><br>
+    <button onclick="document.getElementById('myImage').src='https://kesehatan.polije.ac.id/img/kesehatan/polijelogo.png'">Ganti Gambar</button>
+  </div>
+
+  <!-- Ganti Warna -->
+  <div class="box">
+    <h2>Ganti Warna Teks</h2>
+    <h1 id="id1">Hello World !!!</h1>
+    <button onclick="document.getElementById('id1').style.color='blue'">Click !!!</button>
+  </div>
+
+  <!-- Ganti Isi HTML -->
+  <div class="box">
+    <h2>Ganti Isi HTML</h2>
+    <p id="p1">Hello World!</p>
+    <script>
+      document.getElementById("p1").innerHTML = "New World!!!";
+    </script>
+    <p>Kata di atas berubah</p>
+  </div>
+
+  <!-- Validasi Data -->
+  <div class="box">
+    <h2>Validasi Data</h2>
+    <p>Masukan Nilai antara 1 sampai 10:</p>
+    <input id="num">
+    <button onclick="validateInput()">Submit</button>
+    <p id="demo2"></p>
+  </div>
+
+  <!-- Event Handling -->
+  <div class="box">
+    <h2>Event Handling - Click ubah isi</h2>
+    <h1 onclick="this.innerHTML='Ooops!'">Click Disini!</h1>
+  </div>
+
+  <div class="box">
+    <h2>Event Handling - Fungsi Eksternal</h2>
+    <h1 onclick="changeText(this)">Click Disini!</h1>
+  </div>
+
+  <div class="box">
+    <h2>Event Handling - Tampilkan Tanggal</h2>
+    <button onclick="displayDate()">The time is?</button>
+    <p id="demo3"></p>
+  </div>
+
+  <div class="box">
+    <h2>Event Handling - Uppercase Input</h2>
+    <label>Masukan nama (huruf kecil): </label>
+    <input type="text" id="fname" onchange="upperCase()">
+  </div>
+
+  <div class="box">
+    <h2>Mouse Over Event</h2>
+    <div class="hover-box" onmouseover="mOver(this)" onmouseout="mOut(this)">Mouse Over Me</div>
+  </div>
+
+  <div class="box">
+    <h2>Mouse Down & Up Event</h2>
+    <div class="click-box" onmousedown="mDown(this)" onmouseup="mUp(this)">Click Me</div>
+  </div>
+
+  <div class="box">
+    <h2>Mouse Over (Inline Style)</h2>
+    <h1 onmouseover="this.style.color='red'" onmouseout="this.style.color='black'">Mouse over this text</h1>
+  </div>
+
+  <div class="box">
+    <h2>addEventListener Example 1</h2>
+    <button id="myBtn">Click !!!</button>
+    <p id="demo4"></p>
+  </div>
+
+  <div class="box">
+    <h2>addEventListener Example 2</h2>
+    <button id="myBtn2">Try it</button>
+  </div>
+
+  <div class="box">
+    <h2>addEventListener Example 3</h2>
+    <button id="myBtn3">Try it</button>
+  </div>
+
+  <script>
+    // Get Element by ID & Tag
+    var x = document.getElementById("main");
+    var y = x.getElementsByTagName("p");
+    document.getElementById("demo").innerHTML =
+      'Paragraf pertama dari tag p index 0 dalam div "main" adalah: ' + y[0].innerHTML;
+
+    // Validasi
+    function validateInput() {
+      let x = document.getElementById("num").value;
+      let text;
+      if (isNaN(x) || x < 1 || x > 10) {
+        text = "Input not valid";
+      } else {
+        text = "Input OK";
+      }
+      document.getElementById("demo2").innerHTML = text;
+    }
+
+    function changeText(id) {
+      id.innerHTML = "Hallo!";
+    }
+
+    function displayDate() {
+      document.getElementById("demo3").innerHTML = Date();
+    }
+
+    function upperCase() {
+      const x = document.getElementById("fname");
+      x.value = x.value.toUpperCase();
+    }
+
+    function mOver(obj) {
+      obj.innerHTML = "Thank You";
+    }
+
+    function mOut(obj) {
+      obj.innerHTML = "Mouse Over Me";
+    }
+
+    function mDown(obj) {
+      obj.style.backgroundColor = "#1ec5e5";
+      obj.innerHTML = "Release Me";
+    }
+
+    function mUp(obj) {
+      obj.style.backgroundColor = "#D94A38";
+      obj.innerHTML = "Thank You";
+    }
+
+    document.getElementById("myBtn").addEventListener("click", function () {
+      document.getElementById("demo4").innerHTML = Date();
+    });
+
+    document.getElementById("myBtn2").addEventListener("click", function () {
+      alert("Hello World!");
+    });
+
+    document.getElementById("myBtn3").addEventListener("click", myFunction);
+
+    function myFunction() {
+      alert("Hello World!");
+    }
+
+    // Alert saat halaman dimuat
+    window.onload = function () {
+      alert("Pesan ini akan muncul setiap halaman di load");
+    };
+  </script>
+</body>
+</html>
